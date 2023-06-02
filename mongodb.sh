@@ -1,13 +1,18 @@
-echo -e "\e[33mCopy MongoDB repo file\e[0m"
+source common.sh
 
-cp mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
+echo -e " ${color} Copy MongoDB Repo file  ${nocolor} "
+cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo   &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33mInstalling MongoDB Server\e[0m"
-yum install mongodb-org -y &>>/tmp/roboshop.log
+echo -e " ${color} Installing MongoDB Server ${nocolor} "
+yum install mongodb-org -y  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33mUpdate MongoDB Listen IP address\e[0m"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+echo -e " ${color} Update MongoDB Listen Address ${nocolor} "
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+stat_check $?
 
-echo -e "\e[33mStart MongoDB service\e[0m"
-systemctl enable mongod &>>/tmp/roboshop.log
-systemctl restart mongod &>>/tmp/roboshop.log
+echo -e " ${color} Start MongoDB Service ${nocolor} "
+systemctl enable mongod  &>>/tmp/roboshop.log
+systemctl restart mongod  &>>/tmp/roboshop.log
+stat_check $?

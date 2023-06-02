@@ -1,21 +1,28 @@
-echo  -e "\e[33m Installing Nginx Server\e[0m"
+source common.sh
+
+echo -e "${color} Installing Nginx Server ${nocolor}"
 yum install nginx -y &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Removing the old content Nginx Server \e[0m"
+echo -e "${color} Removing Old App content ${nocolor}"
 rm -rf /usr/share/nginx/html/* &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Downloading Frontend Content Nginx Server \e[0m"
+echo -e "${color} Downloading Frontend Content ${nocolor}"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e  "\e[33m Extracting Frontend content Nginx Server \e[0m"
-cd /usr/share/nginx/html &>>/tmp/roboshop.log
-unzip /tmp/frontend.zip  &>>/tmp/roboshop.log
+echo -e "${color} Extract Frontend Content ${nocolor}"
+cd /usr/share/nginx/html
+unzip /tmp/frontend.zip &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Update Frontend Configuration \e[0m"
-cp  /home/centos/Roboshop-shell/roboshop.conf /etc/nginx/default.d/Roboshop.conf
 
-echo -e "\e[33m Starting Nginx Server \e[0m"
+echo -e "${color} Update Frontend Configuration ${nocolor}"
+cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>/tmp/roboshop.log
+stat_check $?
+
+echo -e "${color} Starting Nginx Server ${nocolor}"
 systemctl enable nginx &>>/tmp/roboshop.log
 systemctl restart nginx &>>/tmp/roboshop.log
-
-
+stat_check $?
