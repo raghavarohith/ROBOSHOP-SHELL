@@ -1,13 +1,13 @@
 echo -e "\e[33m Install python \e[0m"
 yum install python36 gcc python3-devel -y &>>/tmp/roboshop.log
 
-echo -e "\e[33m Add application use \e[0m"
+echo -e "\e[33m Add application user \e[0m"
 useradd roboshop &>>/tmp/roboshop.log
 
 
 echo -e "\e[33m Create application directory \e[0m"
-
 rm-rf /app &>>/tmp/roboshop.log
+
 mkdir /app
 
 echo  -e "\e[33m Download the application content \e[0m"
