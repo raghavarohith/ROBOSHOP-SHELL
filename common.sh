@@ -73,7 +73,7 @@ nodejs() {
 
 mongo_schema_setup() {
   echo -e "${color} Copy MongoDB Repo file ${nocolor}"
-  cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>$log_file
+  cp /home/centos/Roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>$log_file
   stat_check $?
 
   echo -e "${color} Install MongoDB Client ${nocolor}"
