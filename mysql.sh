@@ -13,3 +13,6 @@ systemctl restart mysqld &>>/tmp/roboshop.log
 
 echo -e "\e[33m Setup MySQL Password \e[0m"
 mysql_secure_installation --set-root-pass $1 &>>/tmp/roboshop.log
+
+echo -e "\e[33m  MySQL Password \e[0m"
+mysql -uroot -pRoboShop@1
